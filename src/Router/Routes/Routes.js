@@ -6,24 +6,33 @@ import SignUp from "../../Pages/SignUp/SignUp";
 const { createBrowserRouter } = require("react-router-dom");
 
 const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Main></Main>, 
-      children: [
-        {
-            path: '/',
-            element: <Home></Home>
-        },
-        {
-          path: '/login', 
-          element: <Login></Login>
-        },
-        {
-          path: '/signup', 
-          element: <SignUp></SignUp>
-        },
-      ]
-    }
-  ]);
+  {
+    path: '/',
+    element: <Main></Main>,
+    children: [
+      {
+        path: '/',
+        element: <Home></Home>
+      },
+      {
+        path: '/login',
+        element: <Login></Login>
+      },
+      {
+        path: '/signup',
+        element: <SignUp></SignUp>
+      },
+      {
+        path: '/checkout/:id',
+        element: <Checkout></Checkout>,
+        loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
+      },
+      {
+        path: '/orders',
+        element: <Orders></Orders>
+      }
+    ]
+  }
+]);
 
-  export default router;
+export default router;
